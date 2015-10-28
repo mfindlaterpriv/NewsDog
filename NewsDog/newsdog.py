@@ -19,15 +19,6 @@ class NewsDog():
     def __init__(self):
         '''Establishes a connection to Reddit'''
         self.reddit = praw.Reddit(user_agent='NewsDog')
-        
-    def add_geohit(self, place):
-        # If exists, increment
-        results = [n for n in self.geohits if n[0] == place]
-        if results:
-            self.geohits[self.geohits.index(results[0])][1] += 1
-        # If not, create
-        else:
-            self.geohits.append([place, 1])
             
     def analyze_day(self, limit=5):
         submissions = self.reddit.get_subreddit(SUBREDDIT).get_top_from_year(limit=limit)
@@ -36,6 +27,15 @@ class NewsDog():
             print(post.url)
             if 'www.reddit.com' not in post.url:
                 self.get_article(post.url)
+
+    def add_geohit(self, place):
+        # If exists, increment
+        results = [n for n in self.geohits if n[0] == place]
+        if results:
+            self.geohits[self.geohits.index(results[0])][1] += 1
+        # If not, create
+        else:
+            self.geohits.append([place, 1])
             
     def geo_sources(self, text):
         # Remove punctuation
@@ -51,14 +51,21 @@ class NewsDog():
         country_file.close()
         text_split = text.split(' ')
         
+        found_match = False
+        
         # Find countries mentioned
         for word in text_split:
             for row in country_data:
                 if row[3] in word:
                     self.check_country(word)
+                    found_match = True
                 elif text_split.index(word)+1 <= len(text_split)-1 and word+' '+text_split[text_split.index(word)+1] == row[3]:
-                    print('Direct match', word+' '+text_split[text_split.index(word)+1], 'and', row[3])
+                    print('Direct double match', word+' '+text_split[text_split.index(word)+1], 'and', row[3])
                     self.check_country(word+' '+text_split[text_split.index(word)+1])
+                    found_match = True
+            # If we still haven't found something, check for a demonym
+            if not found_match:
+                self.check_country(word)
     
     def get_article(self, url):
         article = Article(url)
@@ -72,18 +79,13 @@ class NewsDog():
             
     def check_country(self, name):
         name = name.lower()
-        end = False
         c_defs = codecs.open(DEMS, 'r', encoding='utf-8')
-        while not end:
-            # Separate lines
-            for line in c_defs.read().split('\n'):
-                # Separate elements
-                for element in line.split(','):
-                    if name == element.lower():
-                        # Add a match, and exit while loop
-                        self.add_geohit(line.split(',')[0])
-                        end = True # Found so exit
-            end = True
+        for line in c_defs.read().split('\n'):
+            # Separate elements
+            for element in line.split(','):
+                if name == element.lower():
+                    # Add a match, and exit while loop
+                    self.add_geohit(line.split(',')[0])
         c_defs.close()
 
 def main():
