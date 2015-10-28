@@ -9,6 +9,10 @@ import string
 from ftfy import fix_text
 from newspaper import Article
 
+# TODO:    
+#    Migrate reddit functionality to Redditor class.
+#    Add additional functionality.
+
 # Configuration
 SUBREDDIT = 'worldnews'
 GEOSOURCE_COUNTRY = 'geodata/GEODATASOURCE-COUNTRY.TXT'

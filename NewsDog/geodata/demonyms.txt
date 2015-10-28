@@ -70,7 +70,7 @@ East Timor,Timorese,Timorese,Maubere
 Ecuador,Ecuadorian,Ecuadorians
 Egypt,Egyptian,Egyptians
 El Salvador,Salvadoran,Salvadorans,Guanacos
-England,English,British,English,Englishmen,Englishman,Englishwomen,Englishwoman,British
+England,British,English,Englishmen,Englishman,Englishwomen,Englishwoman,British
 Equatorial Guinea,Equatorial Guinean,Equatoguinean,Equatorial Guineans,Equatoguineans
 Eritrea,Eritrean,Eritreans
 Estonia,Estonian,Estonians
@@ -114,7 +114,7 @@ Israel,Israeli,Israelis
 Italy,Italian,Italians
 Ivory Coast,Ivorian,Ivorians
 Jamaica,Jamaican,Jamaicans
-Jan Mayen,Jan Mayen,
+Jan Mayen,Jan Mayen
 Japan,Japanese,Japanese
 Channel Island,Channel Islander
 Jordan,Jordanian,Jordanians
@@ -217,7 +217,7 @@ South Ossetia,South Ossetian,South Ossetians
 South Sudan,South Sudanese,South Sudanese,Spain,Spanish,Spaniards
 Sri Lanka,Sri Lankan,Sri Lankans
 Sudan,Sudanese,Sudanese,Surinam,Surinamese,Surinamers
-Svalbard,Svalbard,
+Svalbard,Svalbard
 Swaziland,Swazi,Swazis
 Sweden,Swedish,Swedes
 Switzerland,Swiss,Swiss,Syria,Syrian,Syrians
@@ -235,7 +235,7 @@ Tuvalu,Tuvaluan,Tuvaluans
 Uganda,Ugandan,Ugandans
 Ukraine,Ukrainian,Ukrainians
 United Arab Emirates,Emirati,Emirian,Emiri,Emiratis,Emirians
-United Kingdom,British,UK,Britons,
+United Kingdom,British,UK,Britons
 United States,United States,US,American,Americans
 Uruguay,Uruguayan,Uruguayans,Charrúas
 Uzbekistan,Uzbekistani,Uzbek,Uzbekistanis,Uzbeks
