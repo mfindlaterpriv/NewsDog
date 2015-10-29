@@ -9,9 +9,12 @@ import string
 from ftfy import fix_text
 from newspaper import Article
 
+from redditor import Redditor
+
 # TODO:    
 #    Migrate reddit functionality to Redditor class.
 #    Add additional functionality.
+#    Clean up code.
 
 # Configuration
 SUBREDDIT = 'worldnews'
@@ -24,13 +27,13 @@ class NewsDog():
         '''Establishes a connection to Reddit'''
         self.reddit = praw.Reddit(user_agent='NewsDog')
             
-    def analyze_day(self, limit=5):
-        submissions = self.reddit.get_subreddit(SUBREDDIT).get_top_from_year(limit=limit)
-        for post in submissions:
-            print(post)
-            print(post.url)
-            if 'www.reddit.com' not in post.url:
-                self.get_article(post.url)
+    def get_news(self, limit=5, source='reddit'):
+        if source is 'reddit':
+            reddit = Redditor()
+            for link in reddit.analyze_day(limit):
+                self.get_article(link)
+        else:
+            print('No source selected!')
 
     def add_geohit(self, place):
         # If exists, increment
@@ -94,7 +97,7 @@ class NewsDog():
 
 def main():
     nd = NewsDog()
-    nd.analyze_day(limit=100)
+    nd.get_news(limit=100)
     nd.geo_csv()
 
 if __name__ == '__main__': main()
